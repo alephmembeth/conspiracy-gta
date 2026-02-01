@@ -1,21 +1,24 @@
 \documentclass[scrarticle]{scrartcl}
 
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{authblk}
    \renewcommand\Affilfont{\small}
+\usepackage[english]{babel}
 \usepackage[style=english]{csquotes}
 \usepackage{dcolumn}
    \newcolumntype{d}[1]{D{.}{.}{#1}}
 \usepackage{float}
 \usepackage{graphicx}
+   \graphicspath{{./figures/}}
 \usepackage[hidelinks]{hyperref}
    \urlstyle{rm}
 \usepackage[os=win]{menukeys}
 \usepackage[authoryear]{natbib}
-\usepackage{url}
+\usepackage{pdflscape}
 
 \setcitestyle{aysep={}}
 
@@ -23,47 +26,163 @@
    \setlength{\skip\footins}{1.5em}
    \setlength{\footnotesep}{1em}
 
+\addto\extrasenglish{
+   \def\sectionautorefname{Section}
+   \def\subsectionautorefname{Subsection}
+}
+
+\title{The Truth is Out There}
+\subtitle{How the Grand Theft Auto Series Plays With Conspiracy Narratives}
+
+\author[1]{Alexander Max Bauer}
+\author[2]{Jacob Birken}
+\author[3]{Lukas Daniel Klausner}
+
+\affil[1]{ Carl von Ossietzky University of Oldenburg}
+\affil[2]{ University of Cologne}
+\affil[3]{ University of Applied Sciences St. Pölten}
+
+\date{\small In preparation for:\\
+Ann-Kathrin Michelle Günther, Rudolf Thomas Inderst, Leonie Eva Konietzko, and Daniel Meis (eds.): \textit{\enquote{So $\ldots$ this is what the dream feels like. This is the victory we longed for.} Diskurse, Dynamiken und Dissonanzen in Grand Theft Auto}.}
+
 \begin{document}
+\maketitle
+
+\vspace{\fill}
+\noindent\textbf{Abstract:}
+We investigate conspiracy narratives' representation in the GTA series, emphasising their role as parodic motifs.
+To do so, we undertake close readings of selected game elements (e.\,g. missions, dialogue, radio shows, environmental storytelling) and situate them within broader US conspiracy discourses of the respective decades, such as alien abductions, government surveillance, or corporate technological dystopias.
+In addition, we have compiled a text corpus consisting of thirteen GTA games and expansions, which we use to approach the topic from an additional corpus-analytical perspective.
+We also situate the GTA series within key turns of US conspiracy culture between the late twentieth and early twenty-first century.\\[2ex]
+
+\noindent\textbf{Keywords:} American Culture, Close Reading, Conspiracy Narratives, Corpus Analysis, Parody, Satire\\[0.5ex]
+
+
+%%%%%%%%%%%%%%%%
+% INTRODUCTION %
+%%%%%%%%%%%%%%%%
+\newpage
+\section{Introduction}\label{sec:introduction}
 
 
 %%%%%%%%%%
 % CORPUS %
 %%%%%%%%%%
 \section{The GTA Corpus}\label{sec:corpus}
-Text files for \textit{Grand Theft Auto} (1997), \textit{Grand Theft Auto 2} (1999), \textit{Grand Theft Auto III} (2001), \textit{Grand Theft Auto: Vice City} (2002), \textit{Grand Theft Auto: San Andreas} (2004), \textit{Grand Theft Auto Advance} (2004), \textit{Grand Theft Auto: Liberty City Stories} (2005), \textit{Grand Theft Auto: Vice City Stories} (2006), and \textit{Grand Theft Auto: Chinatown Wars} (2009) were sourced from the internet.
-Files for \textit{Grand Theft Auto IV} (2008), \textit{Grand Theft Auto IV: The Lost and Damned} (2009), \textit{Grand Theft Auto IV: The Ballad of Gay Tony} (2009), as well as \textit{Grand Theft Auto V} (2013) have been identified, decompressed, decrypted, and converted from the proprietary GXT2 archives using the OpenIV utility.
-The extraction targeted specific language repositories within the game's file system to ensure a comprehensive capture of English strings (for a full list of files as well as their sources in the web or the game files, see \autoref{sec:app_corpus}).
+To gain further insights, we compiled a corpus of in-game text lines from various installations of the GTA series.
+In the following, we first describe the creation and structure of the corpus (\autoref{sec:corpus_creation}) before taking a closer look at traces of conspiracy narratives (\autoref{sec:corpus_conspiracy}).
 
-The $950$ files share a consistent underlying structure:
+
+%%%%%%%%%%%%%%%%%%%%%
+% CORPUS – CREATION %
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{Creation and Structure}\label{sec:corpus_creation}
+The corpus comprises a total of $952$ files, the vast majority of which are accounted for by GTA V and its numerous updates, especially for the online mode.
+We compiled these files from a variety of sources.
+For \textit{Grand Theft Auto} (1997), \textit{Grand Theft Auto 2} (1999), \textit{Grand Theft Auto III} (2001), \textit{Grand Theft Auto: Vice City} (2002), \textit{Grand Theft Auto: San Andreas} (2004), \textit{Grand Theft Auto Advance} (2004), \textit{Grand Theft Auto: Liberty City Stories} (2005), \textit{Grand Theft Auto: Vice City Stories} (2006), and \textit{Grand Theft Auto: Chinatown Wars} (2009), files were sourced from the internet.
+For \textit{Grand Theft Auto: London, 1969} (1999) and \textit{Grand Theft Auto: London, 1961} (1999), texts have been extracted from the game files and decrypted using a Python script.\footnote{The script for this and all subsequent steps of the analysis is available from \url{https://github.com/alephmembeth/conspiracy-gta/tree/main/analysis/}.}
+Similarly, files for \textit{Grand Theft Auto IV} (2008), \textit{Grand Theft Auto IV: The Lost and Damned} (2009), \textit{Grand Theft Auto IV: The Ballad of Gay Tony} (2009), as well as \textit{Grand Theft Auto V} (2013) have been identified, decompressed, decrypted, and converted from the game files using the OpenIV utility.
+The extraction targeted specific language repositories within the file systems to ensure a comprehensive capture of English strings.
+For a full list of files as well as their sources in the web or the game files, see \autoref{sec:app_corpus}.
+
+The collected files share a consistent underlying structure:
 They begin with metadata headers (e.\,g., containing version information), followed by a line-by-line mapping of unique keys to specific text content.
 Furthermore, the text contains internal markup, such as color codes and formatting tags.
-In its raw state, the corpus appears as shown below.
+For some key metrics of the raw corpus, see \autoref{tab:metrics_raw}.
 
 \begin{table}[h!]
-\begin{tabular}{lr}
-   Metric              & Value               \\\hline\hline
-   Lines               &    $631,033$        \\
-   Characters          & $27,877,767$        \\
-   Tokens              &  $4,131,031$        \\
-   Unique Word Types   &    $769,730$        \\
-   Type-Token Ratio    &          $0.1863$   \\\hline
-\end{tabular}
+   \centering
+   \begin{tabular}{lr}
+      Metric              & Value               \\\hline\hline
+      Lines               &    $632,517$        \\
+      Characters          & $27,961,234$        \\
+      Tokens              &  $4,146,908$        \\
+      Unique Word Types   &    $769,987$        \\
+      Type-Token Ratio    &          $0.1857$   \\\hline
+   \end{tabular}
+   \caption{Key metrics of the raw corpus}
+   \label{tab:metrics_raw}
 \end{table}
 
-\noindent We used regular expressions and heuristic filters to systematically eliminate technical noise from the dataset.
-Specifically, tilde-wrapped sequences, underscored identifiers, strings consisting entirely of uppercase letters, as well as purely numeric sequences were stripped.\footnote{The Python script is available from \url{https://github.com/alephmembeth/conspiracy-gta/tree/main/analysis}.}
-After cleaning the data in this way, the processed corpus looks as follows.
+We use regular expressions and heuristic filters to systematically eliminate technical noise from the dataset.
+Specifically, tilde-wrapped sequences, underscored identifiers, and purely numeric strings were stripped.
+Uppercase sequences were filtered contextually:
+Single-word uppercase strings were removed as (potential) technical identifiers, while multi-word uppercase sequences were retained as (potential) valid sentences.
+After cleaning the data this way, the calculated metrics change as shown in \autoref{tab:metrics_processed}.
 
 \begin{table}[h!]
-\begin{tabular}{lrr}
-   Metric              & Value               & Difference           \\\hline\hline
-   Lines               &    $367,301$        &    $-263,732$        \\
-   Characters          & $15,347,302$        & $-12,530,465$        \\
-   Tokens              &  $2,686,957$        &  $-1,444,074$        \\
-   Unique Word Types   &     $45,697$        &    $-724,033$        \\
-   Type-Token Ratio    &          $0.0170$   &          $-0.1693$   \\\hline
-\end{tabular}
+   \centering
+   \begin{tabular}{lrr}
+      Metric              & Value               & Difference           \\\hline\hline
+      Lines               &    $379,194$        &    $-253,323$        \\
+      Characters          & $15,714,071$        & $-12,247,163$        \\
+      Tokens              &  $2,747,884$        &  $-1,399,024$        \\
+      Unique Word Types   &     $47,105$        &    $-722,882$        \\
+      Type-Token Ratio    &          $0.0171$   &          $-0.1685$   \\\hline
+   \end{tabular}
+   \caption{Key metrics of the processed corpus}
+   \label{tab:metrics_processed}
 \end{table}
+
+The processed corpus exhibits significant lexical richness, with \textit{hapax legomena} accounting for $35.52\%$ of the total vocabulary.
+We observe a high lexical density ($0.777$), the ratio of content words to total words, indicating an information-rich text with content-carrying words.
+The corpus is characterized by a concise structure with an average of $7.25$ words per line and an average of $4.45$ characters per word.
+The distribution of word lengths (see \autoref{fig:distribution_word_lengths}) peaks at $3$ to $4$ characters.
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[scale=0.45]{conspiracy_gta_word_length_distribution.png}
+   \caption{Distribution of word lengths}
+   \label{fig:distribution_word_lengths}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% CORPUS – CONSPIRACY %
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Traces of Conspiracy Narratives}\label{sec:corpus_conspiracy}
+To look for traces of conspiracy narratives within the \textit{Grand Theft Auto} series, we use four thematic blocks to organize keywords: (1) Governments and Elites, (2) Technology and Biology, (3) Information and Disinformation, as well as (4) Extraterrestrial and Paranormal. 
+At this stage, we use terms that are not specific to the series (such as \enquote{Epsilon Program,} \enquote{FIB,} \enquote{IAA,} or the like).
+The following search terms are mapped to the respective categories:
+
+\begin{itemize}
+   \item[\textsf{\textbf{(1)}}] \textsf{\textbf{Governments and Elites:}} \texttt{"agency", "authorit*", "black ops", "bureau*", "cabal*", "clandestine", "corrupt*", "deep state", "elite*", "enlighten*", "establishment", "globalist*", "government*", "illuminati*", "initiate*", "intelligence", "jew*", "mason*", "new world order", "police state", "secret society", "surveil*"}
+   \item[\textsf{\textbf{(2)}}] \textsf{\textbf{Technology and Biology:}} \texttt{"bio-weapon*", "chemical*", "chemtrail*", "chip*", "clon*", "dna", "fluoride", "frequency", "genetic*", "implant*", "mk-ultra", "nanobot*", "pandem*", "pathogen*", "poison*", "radiation", "satellite*", "toxic*", "vaccin*", "virus"}
+   \item[\textsf{\textbf{(3)}}] \textsf{\textbf{Information and Disinformation:}} \texttt{"brainwash*", "classified", "cover-up", "decept*", "distort*", "fake*", "hoax*", "indoctrinate*", "manipulate*", "masses", "media", "paranoi*", "red pil", "propaganda", "scripted", "sheep*", "spie*", "staged", "subliminal*", "top-secret", "truth", "unveil*", "wiretap*"}
+   \item[\textsf{\textbf{(4)}}] \textsf{\textbf{Extraterrestrial and Paranormal:}} \texttt{"abduct*", "alien*", "ancient", "anomal*", "apocalyp*", "armageddon", "artifact*", "asteroid*", "beaming", "beast*", "cosmic", "creature*", "extraterrestrial*", "interstellar", "lifeform*", "meteor*", "otherworldly", "paranormal", "prophecy", "ritual*", "sacred", "saucer*", "scripture*", "spacecraft*", "telepathy", "ufo*", "unidentified"}
+\end{itemize}
+
+This can be used to create a heatmap, visualizing how often words from these clusters appear in each game (see \autoref{fig:heatmap}).
+To make their appearance comparable across games, we normalize our measurement of occurrences as hits per 1,000 lines of text.
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[scale=0.45]{conspiracy_gta_heatmap.png}
+   \caption{Relative frequency of thematic dimensions across the series, normalized to hits per 1,000 lines of text}
+   \label{fig:heatmap}
+\end{figure}
+
+Additionally, a barcode plot illustrates the distribution of those dimension across the entire corpus (see \autoref{fig:barcode_dimensions}).
+Unlike the heatmap, which further aggregates data, this visualization maps every individual keyword hit as a discrete vertical line along the axis of the text.
+The same can be done for single search terms (see \autoref{fig:barcode_keywords}).
+
+\begin{landscape}
+   \begin{figure}[h!]
+      \centering
+      \includegraphics[scale=0.45]{conspiracy_gta_barcode_dimensions.png}
+      \caption{Lexical dispersion plot of keywords across the corpus, categorized by thematic dimension}
+      \label{fig:barcode_dimensions}
+   \end{figure}
+\end{landscape}
+
+\begin{landscape}
+   \begin{figure}[h!]
+      \centering
+      \includegraphics[scale=0.45]{conspiracy_gta_barcode_keywords.png}
+      \caption{Lexical dispersion plot of keywords across the corpus, categorized by thematic dimension}
+      \label{fig:barcode_keywords}
+   \end{figure}
+\end{landscape}
 
 
 %%%%%%%%%%%%
@@ -76,7 +195,7 @@ After cleaning the data in this way, the processed corpus looks as follows.
 %%%%%%%%%%%%%%%%%%%%%
 % APPENDIX – CORPUS %
 %%%%%%%%%%%%%%%%%%%%%
-\section{Sources of the GTA Corpus}\label{sec:app_corpus}
+\section{Sources of the Corpus}\label{sec:app_corpus}
 
 \subsection*{Grand Theft Auto (1997)}
 \url{https://fusionfix.io/gta-text}
@@ -87,8 +206,26 @@ After cleaning the data in this way, the processed corpus looks as follows.
 \end{quote}
 
 
+\subsection*{Grand Theft Auto: London, 1969 (1999)}
+\textbackslash{}Grand Theft Auto London 1961 and 1969\textbackslash{}Game Files\textbackslash{}Data\textbackslash{}gtadata\textbackslash{}uk\textbackslash{}
+
+\begin{quote}
+   \ttfamily
+   enguk.fxt
+\end{quote}
+
+
+\subsection*{Grand Theft Auto: London, 1961 (1999)}
+\textbackslash{}Grand Theft Auto London 1961 and 1969\textbackslash{}Game Files\textbackslash{}Data\textbackslash{}gtadata\textbackslash{}uk\textbackslash{}
+
+\begin{quote}
+   \ttfamily
+   enguke.fxt
+\end{quote}
+
+
 \subsection*{Grand Theft Auto 2 (1999)}
-\url{http://spaceeinstein.altervista.org/gxt/GTA2\_EN.txt}
+\url{http://spaceeinstein.altervista.org/gxt/}
 
 \begin{quote}
    \ttfamily
@@ -151,7 +288,7 @@ After cleaning the data in this way, the processed corpus looks as follows.
 
 
 \subsection*{Grand Theft Auto IV (2008)}
-\textbackslash{}Grand Theft Auto IV\textbackslash{}GTAIV\textbackslash{}common\textbackslash{}text
+\textbackslash{}Grand Theft Auto IV\textbackslash{}GTAIV\textbackslash{}common\textbackslash{}text\textbackslash{}
 
 \begin{quote}
    \ttfamily
@@ -160,7 +297,7 @@ After cleaning the data in this way, the processed corpus looks as follows.
 
 
 \subsection*{Grand Theft Auto IV: The Lost and Damned (2009)}
-\textbackslash{}Grand Theft Auto IV\textbackslash{}GTAIV\textbackslash{}TLAD\textbackslash{}common\textbackslash{}text
+\textbackslash{}Grand Theft Auto IV\textbackslash{}GTAIV\textbackslash{}TLAD\textbackslash{}common\textbackslash{}text\textbackslash{}
 
 \begin{quote}
    \ttfamily
@@ -169,7 +306,7 @@ After cleaning the data in this way, the processed corpus looks as follows.
 
 
 \subsection*{Grand Theft Auto IV: The Ballad of Gay Tony (2009)}
-\textbackslash{}Grand Theft Auto IV\textbackslash{}GTAIV\textbackslash{}TBoGT\textbackslash{}common\textbackslash{}text
+\textbackslash{}Grand Theft Auto IV\textbackslash{}GTAIV\textbackslash{}TBoGT\textbackslash{}common\textbackslash{}text\textbackslash{}
 
 \begin{quote}
    \ttfamily
