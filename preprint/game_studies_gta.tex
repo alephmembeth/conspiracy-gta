@@ -80,7 +80,7 @@ In the following, we first describe the creation and structure of the corpus (\a
 The corpus comprises a total of $952$ files, the vast majority of which are accounted for by GTA V and its numerous updates, especially for the online mode.
 We compiled these files from a variety of sources.
 For \textit{Grand Theft Auto} (1997), \textit{Grand Theft Auto 2} (1999), \textit{Grand Theft Auto III} (2001), \textit{Grand Theft Auto: Vice City} (2002), \textit{Grand Theft Auto: San Andreas} (2004), \textit{Grand Theft Auto Advance} (2004), \textit{Grand Theft Auto: Liberty City Stories} (2005), \textit{Grand Theft Auto: Vice City Stories} (2006), and \textit{Grand Theft Auto: Chinatown Wars} (2009), files were sourced from the internet.
-For \textit{Grand Theft Auto: London, 1969} (1999) and \textit{Grand Theft Auto: London, 1961} (1999), texts have been extracted from the game files and decrypted using a Python script.\footnote{The script for this and all subsequent steps of the analysis is available from \url{https://github.com/alephmembeth/conspiracy-gta/tree/main/analysis/}.}
+For \textit{Grand Theft Auto: London, 1969} (1999) and \textit{Grand Theft Auto: London, 1961} (1999), texts have been extracted from the game files and decrypted using a Python script.\footnote{The script for this and all subsequent steps of the analysis is available from \url{https://github.com/alephmembeth/game-studies-gta/tree/main/analysis/}.}
 Similarly, files for \textit{Grand Theft Auto IV} (2008), \textit{Grand Theft Auto IV: The Lost and Damned} (2009), \textit{Grand Theft Auto IV: The Ballad of Gay Tony} (2009), as well as \textit{Grand Theft Auto V} (2013) have been identified, decompressed, decrypted, and converted from the game files using the OpenIV utility.
 The extraction targeted specific language repositories within the file systems to ensure a comprehensive capture of English strings.
 For a full list of files as well as their sources in the web or the game files, see \autoref{sec:app_corpus}.
@@ -163,7 +163,7 @@ To make their appearance comparable across games, we normalize our measurement o
    \label{fig:heatmap}
 \end{figure}
 
-Additionally, a barcode plot illustrates the distribution of those dimension across the entire corpus (see \autoref{fig:barcode_dimensions}).
+Additionally, a barcode plot illustrates the distribution of those dimensions across the entire corpus (see \autoref{fig:barcode_dimensions}).
 Unlike the heatmap, which further aggregates data, this visualization maps every individual keyword hit as a discrete vertical line along the axis of the text.
 The same can be done for single search terms (see \autoref{fig:barcode_keywords}).
 
@@ -180,17 +180,17 @@ The same can be done for single search terms (see \autoref{fig:barcode_keywords}
    \begin{figure}[h!]
       \centering
       \includegraphics[scale=0.45]{game_studies_gta_barcode_keywords.png}
-      \caption{Lexical dispersion plot of keywords across the corpus, categorized by thematic dimension}
+      \caption{Lexical dispersion plot of keywords across the corpus}
       \label{fig:barcode_keywords}
    \end{figure}
 \end{landscape}
 
-To analyze the tone of the corpus, we conducted a computational sentiment analysis using the Python library TextBlob.
-Two key metrics were calculated for each line:
+To analyze the tone of the corpus, we conduct a computational sentiment analysis using the Python library TextBlob.
+Two key metrics are calculated for each line:
 \textit{Polarity}, which quantifies the sentiment on a scale from $-1$ (very negative) to $+1$ (very positive), and \textit{Subjectivity}, measuring the degree of personal opinion versus factual information from $0$ (very objective) to $1$ (very subjective).
 The calculation follows a lexicon-based approach, where each word in the text is cross-referenced with a predefined database.
 In this database, terms are assigned specific values for emotionality and factuality.
-Results were then aggregated by game (see \autoref{fig:sentiment_subjectivity}) and thematic dimension (see \autoref{fig:sentiment_subjectivity_by_category}).
+Results are then aggregated by game (see \autoref{fig:sentiment_subjectivity}) and thematic dimension (see \autoref{fig:sentiment_subjectivity_by_category}).
 
 \begin{figure}[h!]
    \centering
