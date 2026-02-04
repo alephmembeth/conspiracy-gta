@@ -131,7 +131,7 @@ The distribution of word lengths (see \autoref{fig:distribution_word_lengths}) p
 
 \begin{figure}[h!]
    \centering
-   \includegraphics[scale=0.45]{conspiracy_gta_word_length_distribution.png}
+   \includegraphics[width=\textwidth]{game_studies_gta_word_length_distribution.png}
    \caption{Distribution of word lengths}
    \label{fig:distribution_word_lengths}
 \end{figure}
@@ -146,6 +146,7 @@ At this stage, we use terms that are not specific to the series (such as \enquot
 The following search terms are mapped to the respective categories:
 
 \begin{itemize}
+   \raggedright
    \item[\textsf{\textbf{(1)}}] \textsf{\textbf{Governments and Elites:}} \texttt{"agency", "authorit*", "black ops", "bureau*", "cabal*", "clandestine", "corrupt*", "deep state", "elite*", "enlighten*", "establishment", "globalist*", "government*", "illuminati*", "initiate*", "intelligence", "jew*", "mason*", "new world order", "police state", "secret society", "surveil*"}
    \item[\textsf{\textbf{(2)}}] \textsf{\textbf{Technology and Biology:}} \texttt{"bio-weapon*", "chemical*", "chemtrail*", "chip*", "clon*", "dna", "fluoride", "frequency", "genetic*", "implant*", "mk-ultra", "nanobot*", "pandem*", "pathogen*", "poison*", "radiation", "satellite*", "toxic*", "vaccin*", "virus"}
    \item[\textsf{\textbf{(3)}}] \textsf{\textbf{Information and Disinformation:}} \texttt{"brainwash*", "classified", "cover-up", "decept*", "distort*", "fake*", "hoax*", "indoctrinate*", "manipulate*", "masses", "media", "paranoi*", "red pil", "propaganda", "scripted", "sheep*", "spie*", "staged", "subliminal*", "top-secret", "truth", "unveil*", "wiretap*"}
@@ -153,11 +154,11 @@ The following search terms are mapped to the respective categories:
 \end{itemize}
 
 This can be used to create a heatmap, visualizing how often words from these clusters appear in each game (see \autoref{fig:heatmap}).
-To make their appearance comparable across games, we normalize our measurement of occurrences as hits per 1,000 lines of text.
+To make their appearance comparable across games, we normalize our measurement of occurrences as hits per $1,000$ lines of text.
 
 \begin{figure}[h!]
    \centering
-   \includegraphics[scale=0.45]{conspiracy_gta_heatmap.png}
+   \includegraphics[width=\textwidth]{game_studies_gta_heatmap.png}
    \caption{Relative frequency of thematic dimensions across the series, normalized to hits per 1,000 lines of text}
    \label{fig:heatmap}
 \end{figure}
@@ -169,7 +170,7 @@ The same can be done for single search terms (see \autoref{fig:barcode_keywords}
 \begin{landscape}
    \begin{figure}[h!]
       \centering
-      \includegraphics[scale=0.45]{conspiracy_gta_barcode_dimensions.png}
+      \includegraphics[scale=0.45]{game_studies_gta_barcode_dimensions.png}
       \caption{Lexical dispersion plot of keywords across the corpus, categorized by thematic dimension}
       \label{fig:barcode_dimensions}
    \end{figure}
@@ -178,11 +179,32 @@ The same can be done for single search terms (see \autoref{fig:barcode_keywords}
 \begin{landscape}
    \begin{figure}[h!]
       \centering
-      \includegraphics[scale=0.45]{conspiracy_gta_barcode_keywords.png}
+      \includegraphics[scale=0.45]{game_studies_gta_barcode_keywords.png}
       \caption{Lexical dispersion plot of keywords across the corpus, categorized by thematic dimension}
       \label{fig:barcode_keywords}
    \end{figure}
 \end{landscape}
+
+To analyze the tone of the corpus, we conducted a computational sentiment analysis using the Python library TextBlob.
+Two key metrics were calculated for each line:
+\textit{Polarity}, which quantifies the sentiment on a scale from $-1$ (very negative) to $+1$ (very positive), and \textit{Subjectivity}, measuring the degree of personal opinion versus factual information from $0$ (very objective) to $1$ (very subjective).
+The calculation follows a lexicon-based approach, where each word in the text is cross-referenced with a predefined database.
+In this database, terms are assigned specific values for emotionality and factuality.
+Results were then aggregated by game (see \autoref{fig:sentiment_subjectivity}) and thematic dimension (see \autoref{fig:sentiment_subjectivity_by_category}).
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[width=\textwidth]{game_studies_gta_sentiment_subjectivity.png}
+   \caption{Average Sentiment and Subjectivity by game}
+   \label{fig:sentiment_subjectivity}
+\end{figure}
+
+\begin{figure}[h!]
+   \centering
+   \includegraphics[width=\textwidth]{game_studies_gta_sentiment_subjectivity_by_category.png}
+   \caption{Average Sentiment and Subjectivity by thematic dimension}
+   \label{fig:sentiment_subjectivity_by_category}
+\end{figure}
 
 
 %%%%%%%%%%%%
